@@ -2,13 +2,13 @@
 
 import os
 import subprocess
+import sys
 
 
 def test_homework():
     """Test Word Count"""
 
     # Carpetas y archivos del paquete homework
-
     for path in [
         "homework/src",
         "homework/src/_internals",
@@ -20,9 +20,12 @@ def test_homework():
     ]:
         if not os.path.exists(path):
             raise Exception(f"'{path}' directory does not exist")
+
     try:
         subprocess.run(
-            ["python3", "-m", "homework", "data/input", "data/output"],
+            [sys.executable,       # ← SUSTITUYE "python3" por sys.executable
+             "-m", "homework",
+             "data/input", "data/output"],
             check=True,
         )
     except subprocess.CalledProcessError as e:
